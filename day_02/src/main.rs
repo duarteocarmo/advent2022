@@ -2,6 +2,53 @@ use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
 
+fn process_puzzle_2(puzzle_line: String) -> i32 {
+    //   println!("The puzzle is : {puzzle_line}");
+    let strings = puzzle_line.split(" ");
+    let vec: Vec<&str> = strings.collect();
+    let oponent_play = vec[0];
+    let objective = vec[1];
+
+    let mut total_score = 0;
+
+    // loose
+    if objective == "X" {
+        total_score += 0;
+
+        match oponent_play {
+            // 1 for Rock, 2 for Paper, and 3 for Scissors
+            //  A for Rock, B for Paper, and C for Scissors
+            "A" => total_score += 3, //rock vs rock
+            "B" => total_score += 1, // rock vs pa[er
+            "C" => total_score += 2, // rock vs scicores
+            _ => println!("ERROR"),
+        }
+    } else if objective == "Y" {
+        //draw
+        total_score += 3;
+
+        match oponent_play {
+            "A" => total_score += 1,
+            "B" => total_score += 2,
+            "C" => total_score += 3,
+            _ => println!("ERROR"),
+        }
+    } else {
+        // win
+        total_score += 6;
+        match oponent_play {
+            "A" => total_score += 2,
+            "B" => total_score += 3,
+            "C" => total_score += 1,
+            _ => println!("ERROR"),
+        }
+    };
+
+    //    println!("Total score: {total_score}");
+
+    total_score
+}
+
 fn process_puzzle(puzzle_line: String) -> i32 {
     //   println!("The puzzle is : {puzzle_line}");
     let strings = puzzle_line.split(" ");
@@ -52,7 +99,7 @@ fn main() {
         for line in lines {
             if let Ok(inputs) = line {
                 println!("Inputs: {}", inputs);
-                let score = process_puzzle(inputs);
+                let score = process_puzzle_2(inputs);
                 final_score += score;
                 println!("Score - {score}")
             }

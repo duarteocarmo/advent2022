@@ -2477,7 +2477,7 @@ C Y
 C X
 C X
 C X
-C p
+C X
 B Y
 C X
 C Y
