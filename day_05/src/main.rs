@@ -88,14 +88,9 @@ fn main() {
         }
     }
 
-    println!("INITIAL: {:?}", stacks);
-
     for line in lines_to_process.clone() {
         if line.contains("move") {
-            println!("{:?}", line);
-
             let numbers = str_strip_numbers(&line);
-            println!("{:?}", numbers);
             let n_to_move = numbers[0] as i32;
             let origin = numbers[1];
             let destination = numbers[2];
@@ -104,7 +99,6 @@ fn main() {
             // remove
             match stacks.entry(origin as i32) {
                 Entry::Vacant(_e) => {
-                    println!("VACANT");
                     // e.insert(vec![value]);
                 }
                 Entry::Occupied(mut e) => {
@@ -118,29 +112,28 @@ fn main() {
                 }
             }
 
-            println!("REMOVED!");
-            println!("Moovers: {:?}", moovers);
+            // println!("REMOVED!");
+            // println!("Moovers: {:?}", moovers);
 
             // add
             match stacks.entry(destination as i32) {
                 Entry::Vacant(_e) => {
-                    println!("VACANT");
                     // e.insert(vec![value]);
                 }
                 Entry::Occupied(mut e) => {
-                    moovers.reverse();
+                    // moovers.reverse();
                     for to_push in moovers {
                         e.get_mut().push(to_push);
                     }
                 }
             }
-            println!("ADDED!");
-            println!("STEP ENDED {:?}", stacks);
-            println!("========");
+            // println!("ADDED!");
+            // println!("STEP ENDED {:?}", stacks);
+            // println!("========");
         }
     }
 
-    println!("FINAL {:?}", stacks);
+    // println!("FINAL {:?}", stacks);
 
     // for (key, value) in stacks.into_iter() {
     //     println!("{:?} / {:?}", key, value);
@@ -149,12 +142,12 @@ fn main() {
     let mut final_code = Vec::new();
 
     for key in stacks.keys().sorted() {
-        println!("{:?} has {:?}", key, stacks[key]);
+        // println!("{:?} has {:?}", key, stacks[key]);
         final_code.push(stacks[key].last().clone().unwrap())
     }
     println!("ANSWER {:?}", final_code);
-    let clean_code = final_code.join("-");
-    println!("ANSWER {:?}", clean_code);
+    // let clean_code = final_code.join("-");
+    // println!("ANSWER {:?}", clean_code);
 }
 
 // The output is wrapped in a Result to allow matching on errors
