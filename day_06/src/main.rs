@@ -18,8 +18,6 @@ fn main() {
                     let uniques: Vec<_> = candidate.into_iter().unique().collect();
 
                     if candidate.len() == uniques.len() {
-                        println!("Candidate: {:?}", candidate);
-                        println!("Current index: {:?}", position);
                         let result = position + window_size;
                         println!("Answer: {:?}", result);
                         break;
